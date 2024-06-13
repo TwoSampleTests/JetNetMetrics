@@ -1,0 +1,213 @@
+{
+    "config_flavor_nsamples_100000_niter_960": {
+        "fgd": {
+            "name": "fgd",
+            "object_name": "FGDMetricNull",
+            "class_name": "GMetrics.FGDMetric",
+            "kwargs": {
+                "num_batches": 20,
+                "num_points": 10,
+                "normalise": false
+            },
+            "result_key": "metric_list",
+            "scale_func": "callable: <lambda>",
+            "scale_func_string": "lambda ns, ndims: 1",
+            "max_vectorize": 6,
+            "latex": "$d_{\\mathrm{FGD}}$",
+            "null_file": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/FGD.json",
+            "thresholds": [
+                [
+                    0.68,
+                    [
+                        652,
+                        307
+                    ],
+                    1.021622037921622e-05
+                ],
+                [
+                    0.95,
+                    [
+                        912,
+                        48
+                    ],
+                    1.2674806191292355e-05
+                ],
+                [
+                    0.99,
+                    [
+                        950,
+                        9
+                    ],
+                    1.4899036113828183e-05
+                ]
+            ],
+            "null_figure": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/FGD.pdf"
+        },
+        "mmd": {
+            "name": "mmd",
+            "object_name": "MMDMetricNull",
+            "class_name": "GMetrics.MMDMetric",
+            "kwargs": {
+                "degree": 4,
+                "block_size": 10000,
+                "normalise": false
+            },
+            "result_key": "metric_list",
+            "scale_func": "callable: <lambda>",
+            "scale_func_string": "lambda ns, ndims: 1",
+            "max_vectorize": 1,
+            "latex": "$d_{\\mathrm{MMD}}$",
+            "null_file": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/MMD.json",
+            "thresholds": [
+                [
+                    0.68,
+                    [
+                        693,
+                        326
+                    ],
+                    -208.68130493164062
+                ],
+                [
+                    0.95,
+                    [
+                        969,
+                        51
+                    ],
+                    7700.098205566406
+                ],
+                [
+                    0.99,
+                    [
+                        1009,
+                        10
+                    ],
+                    15552.414779663086
+                ]
+            ],
+            "null_figure": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/MMD.pdf"
+        },
+        "ks": {
+            "name": "ks",
+            "object_name": "KSTestNull",
+            "class_name": "GMetrics.KSTest",
+            "kwargs": {},
+            "result_key": "statistic_means",
+            "scale_func": "callable: <lambda>",
+            "scale_func_string": "lambda ns, _: np.sqrt(ns)",
+            "max_vectorize": 250,
+            "latex": "$\\overline{D}$",
+            "null_file": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/KS.json",
+            "thresholds": [
+                [
+                    0.68,
+                    [
+                        897,
+                        422
+                    ],
+                    0.8951555464128067
+                ],
+                [
+                    0.95,
+                    [
+                        1254,
+                        66
+                    ],
+                    0.9857152710128189
+                ],
+                [
+                    0.99,
+                    [
+                        1306,
+                        13
+                    ],
+                    1.0394370596500913
+                ]
+            ],
+            "null_figure": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/KS.pdf"
+        },
+        "sks": {
+            "name": "sks",
+            "object_name": "SKSTestNull",
+            "class_name": "GMetrics.SKSTest",
+            "kwargs": {
+                "nslices": 100,
+                "seed_slicing": 0
+            },
+            "result_key": "metric_means",
+            "scale_func": "callable: <lambda>",
+            "scale_func_string": "lambda ns, _: np.sqrt(ns)",
+            "max_vectorize": 20,
+            "latex": "$\\widetilde{D}$",
+            "null_file": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/SKS.json",
+            "thresholds": [
+                [
+                    0.68,
+                    [
+                        652,
+                        307
+                    ],
+                    0.9074872194067829
+                ],
+                [
+                    0.95,
+                    [
+                        912,
+                        48
+                    ],
+                    1.0899498814846613
+                ],
+                [
+                    0.99,
+                    [
+                        950,
+                        9
+                    ],
+                    1.2424497333838154
+                ]
+            ],
+            "null_figure": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/SKS.pdf"
+        },
+        "swd": {
+            "name": "swd",
+            "object_name": "SWDMetricNull",
+            "class_name": "GMetrics.SWDMetric",
+            "kwargs": {
+                "nslices": 100,
+                "seed_slicing": 0
+            },
+            "result_key": "metric_means",
+            "scale_func": "callable: <lambda>",
+            "scale_func_string": "lambda ns, ndims: np.sqrt(ns/ndims)",
+            "max_vectorize": 20,
+            "latex": "$\\widetilde{W}$",
+            "null_file": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/SWD.json",
+            "thresholds": [
+                [
+                    0.68,
+                    [
+                        652,
+                        307
+                    ],
+                    0.015997195177663882
+                ],
+                [
+                    0.95,
+                    [
+                        912,
+                        48
+                    ],
+                    0.020661345722746898
+                ],
+                [
+                    0.99,
+                    [
+                        950,
+                        9
+                    ],
+                    0.026085384280238284
+                ]
+            ],
+            "null_figure": "results/EW_MsplineN/run_1/tests/100K/null_hypotheses/SWD.pdf"
+        }
+    }
+}
