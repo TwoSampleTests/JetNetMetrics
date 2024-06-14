@@ -2,4 +2,8 @@
 *.DS_Store
 *.h5
 data
-NFTF2
+GMetrics
+GMetrics2
+.owncloudsync.log
+.sync_journal.db
+.sync_journal.db-wal
