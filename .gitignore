@@ -1,8 +1,16 @@
 # Custom
+*.pyc
+*mypy_cache*
+*__pycache__*
 *.DS_Store
+*.json
 *.h5
+*/leo*
+*old*
 data
 GMetrics
 .owncloudsync.log
 .sync_journal.db
 .sync_journal.db-wal
+.sync_journal.db-shm
+.sync_journal.db-shm2
