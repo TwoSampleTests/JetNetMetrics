@@ -9,6 +9,8 @@
 *old*
 data
 GMetrics
+*parallel*
+*fail_skip*
 .owncloudsync.log
 .sync_journal.db
 .sync_journal.db-wal
