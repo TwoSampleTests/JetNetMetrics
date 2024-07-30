@@ -18,3 +18,4 @@ GMetrics
 .sync_journal.db-shm2
 .owncloudsync.log.1
 .owncloudsync.log_tmp.1
+results_backup
