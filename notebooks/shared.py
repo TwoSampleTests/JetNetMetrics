@@ -49,7 +49,7 @@ def generate_result_dataframe(global_results, null_times):
     results_df["$\\epsilon_{99\\%\\mathrm{CL}}$"] = results_df["$\\epsilon_{99\\%\\mathrm{CL}}$"].apply(format_bounds)
     results_df["t (s)"] = results_df["t (s)"].apply(format_times)
     null_times_latex = [[i,f"${j}$"] for i,j in null_times]
-    times_df = pd.DataFrame(null_times_latex+[["lr", "-"]], columns=["Statistic", "$t^{\\mathrm{null}}$ (s)"])
+    times_df = pd.DataFrame(null_times_latex, columns=["Statistic", "$t^{\\mathrm{null}}$ (s)"])
     return [results_df, times_df]
 
 def get_individual_dfs(results_df, show = True):
@@ -63,7 +63,7 @@ def get_individual_dfs(results_df, show = True):
     results_df_random_uniform = results_df[results_df["Deformation"] == "random_uniform"].copy()
     
     # Define the custom order
-    custom_order = ['swd', 'ks', 'sks', 'fgd', 'mmd', 'lr']
+    custom_order = ['swd', 'ks', 'sks', 'fgd', 'mmd']
 
     results_df_mean.rename(columns={"$\\epsilon_{95\\%\\mathrm{CL}}$": "$\\epsilon^{\\mu}_{95\\%\\mathrm{CL}}$", "$\\epsilon_{99\\%\\mathrm{CL}}$": "$\\epsilon^{\\mu}_{99\\%\\mathrm    {CL}}$", "t (s)": "$t^{\\mu}$ (s)"}, inplace=True)
     results_df_mean.drop(columns=["Deformation","$N$","$n=m$","$n_{\\mathrm{iter}}$", "95%CL", "99%CL", "time"], inplace=True)
@@ -210,7 +210,6 @@ def generate_result_latex_wide(results_df, times_df, title):
     [results_df_mean, results_df_cov_diag, results_df_cov_off_diag, results_df_power_abs_up, results_df_power_abs_down, results_df_random_normal, results_df_random_uniform] = get_individual_dfs(results_df, show=False)
     # Replace values in the dataframes
     column_replacements = {
-        "lr":  "$t_{\\mathrm{LLR}}$",
         "ks":  "$t_{\\overline{\\mathrm{KS}}}$",
         "sks": "$t_{\\mathrm{SKS}}$",
         "swd": "$t_{\\mathrm{SW}}$",
@@ -235,7 +234,6 @@ def generate_result_latex_wide(results_df, times_df, title):
     result_table_1 = result_table_1.merge(results_df_cov_off_diag, on='Statistic', how='outer')
     result_table_1 = result_table_1.merge(results_df_power_abs_up, on='Statistic', how='outer')
     tmp = pd.DataFrame(result_table_1)
-    tmp = tmp[tmp['Statistic'] != '$t_{\mathrm{LLR}}$']
     for k in tmp.keys()[1:]:
         tmp.loc[:, 'sort_key'] = tmp[k].apply(convert_latex_to_float)
         tmp.sort_values(by='sort_key', ascending=True, inplace=True)
@@ -247,7 +245,6 @@ def generate_result_latex_wide(results_df, times_df, title):
     result_table_2 = result_table_2.merge(results_df_random_uniform, on='Statistic', how='outer')
     result_table_2 = result_table_2.merge(times_df, on='Statistic', how='outer')
     tmp = pd.DataFrame(result_table_2)
-    tmp = tmp[tmp['Statistic'] != '$t_{\mathrm{LLR}}$']
     for k in tmp.keys()[1:]:
         tmp.loc[:, 'sort_key'] = tmp[k].apply(convert_latex_to_float)
         tmp.sort_values(by='sort_key', ascending=True, inplace=True)
@@ -299,7 +296,6 @@ def generate_result_latex(results_df, times_df, title):
     [results_df_mean, results_df_cov_diag, results_df_cov_off_diag, results_df_power_abs_up, results_df_power_abs_down, results_df_random_normal, results_df_random_uniform] = get_individual_dfs(results_df, show=False)
     # Replace values in the dataframes
     column_replacements = {
-        "lr":  "$t_{\\mathrm{LLR}}$",
         "ks":  "$t_{\\overline{\\mathrm{KS}}}$",
         "sks": "$t_{\\mathrm{SKS}}$",
         "swd": "$t_{\\mathrm{SW}}$",
@@ -326,7 +322,6 @@ def generate_result_latex(results_df, times_df, title):
     # Merge the dataframes for the panels
     result_table_1 = results_df_mean.merge(results_df_cov_diag, on='Statistic', how='outer')
     tmp = pd.DataFrame(result_table_1)
-    tmp = tmp[tmp['Statistic'] != '$t_{\mathrm{LLR}}$']
     for k in tmp.keys()[1:]:
         tmp.loc[:, 'sort_key'] = tmp[k].apply(convert_latex_to_float)
         tmp.sort_values(by='sort_key', ascending=True, inplace=True)
@@ -335,7 +330,6 @@ def generate_result_latex(results_df, times_df, title):
 
     result_table_2 = results_df_cov_off_diag.merge(results_df_power_abs_up, on='Statistic', how='outer')
     tmp = pd.DataFrame(result_table_2)
-    tmp = tmp[tmp['Statistic'] != '$t_{\mathrm{LLR}}$']
     for k in tmp.keys()[1:]:
         tmp.loc[:, 'sort_key'] = tmp[k].apply(convert_latex_to_float)
         tmp.sort_values(by='sort_key', ascending=True, inplace=True)
@@ -344,7 +338,6 @@ def generate_result_latex(results_df, times_df, title):
 
     result_table_3 = results_df_power_abs_down.merge(results_df_random_normal, on='Statistic', how='outer')
     tmp = pd.DataFrame(result_table_3)
-    tmp = tmp[tmp['Statistic'] != '$t_{\mathrm{LLR}}$']
     for k in tmp.keys()[1:]:
         tmp.loc[:, 'sort_key'] = tmp[k].apply(convert_latex_to_float)
         tmp.sort_values(by='sort_key', ascending=True, inplace=True)
@@ -353,7 +346,6 @@ def generate_result_latex(results_df, times_df, title):
         
     result_table_4 = results_df_random_uniform.merge(times_df, on='Statistic', how='outer')
     tmp = pd.DataFrame(result_table_4)
-    tmp = tmp[tmp['Statistic'] != '$t_{\mathrm{LLR}}$']
     for k in tmp.keys()[1:]:
         tmp.loc[:, 'sort_key'] = tmp[k].apply(convert_latex_to_float)
         tmp.sort_values(by='sort_key', ascending=True, inplace=True)
